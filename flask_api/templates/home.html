@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/people.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
+    <script src="{{ url_for('static', filename='js/index.js') }}" type="module"></script>
+    <title>RP FLASK REST API</title>
+</head>
+<body>
+    <h1>Hello, Welcome to NotePad</h1>
+    <div class="person-create-card">
+        {% include "_person_create_form.html" %}
+    </div>
+    <div class="people-list">
+        {% for person in people %}
+            {% include "_person_content.html" %}
+        {% endfor %}
+    </div>
+
+    {% if config['DEBUG'] %}
+        {% include "_debug.html" %}
+    {% endif %}
+</body>
+</html>
