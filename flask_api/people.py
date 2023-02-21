@@ -31,6 +31,10 @@ def read_one(person_id):
 def update(person_id, person):
     existing_peron = Person.query.get(person_id)
     if existing_peron:
+        if not person.get('fname') or not person.get('lname'):
+            raise ValueError('First Name and Last Name are required fields')
+            # or abort(400, f"First Name and Last Name are required fields")
+
         update_person = person_schema.load(person, session=db.session)
         existing_peron.fname = update_person.fname
         existing_peron.lname = update_person.lname
