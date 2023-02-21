@@ -8,6 +8,13 @@ def read_all():
     return people_schema.dump(people)
 
 def create(person):
+
+    """ Check if the input person object contains the required fields and 
+    prevent blank creation of "person" """""
+
+    if not person.get('fname') or not person.get('lname'):
+        raise ValueError('First Name and Last Name are required fields')
+
     new_person = person_schema.load(person, session=db.session)
     db.session.add(new_person)
     db.session.commit()
